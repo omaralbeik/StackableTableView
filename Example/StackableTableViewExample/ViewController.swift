@@ -28,14 +28,14 @@ enum DataSource: Int, CustomStringConvertible, CaseIterable {
 
     var description: String {
         switch self {
-            case .toggleSlider:
-                return "Toggle Slider Header View"
-            case .toggleLoremIpsum:
-                return "Toggle Lorem Ipsum Header View"
-            case .toggleTags:
-                return "Toggle Tags Footer View"
-            case .toggleWeb:
-                return "Toggle Web Footer View"
+        case .toggleSlider:
+            return "Toggle Slider Header View"
+        case .toggleLoremIpsum:
+            return "Toggle Lorem Ipsum Header View"
+        case .toggleTags:
+            return "Toggle Tags Footer View"
+        case .toggleWeb:
+            return "Toggle Web Footer View"
         }
     }
 }
@@ -84,14 +84,14 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate {
         guard let item = DataSource.init(rawValue: indexPath.row) else { return }
 
         switch item {
-            case .toggleSlider:
-                sliderView.isHidden.toggle()
-            case .toggleLoremIpsum:
-                loremIpsumView.isHidden.toggle()
-            case .toggleTags:
-                tagsView.isHidden.toggle()
-            case .toggleWeb:
-                webView.isHidden.toggle()
+        case .toggleSlider:
+            sliderView.isHidden.toggle()
+        case .toggleLoremIpsum:
+            loremIpsumView.isHidden.toggle()
+        case .toggleTags:
+            tagsView.isHidden.toggle()
+        case .toggleWeb:
+            webView.isHidden.toggle()
         }
     }
 

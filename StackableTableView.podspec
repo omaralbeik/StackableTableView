@@ -16,6 +16,6 @@ Pod::Spec.new do |s|
   s.ios.deployment_target = '10.0'
   s.swift_version = '5.1'
 
-  s.source_files = 'StackableTableView/**/*'
+  s.source_files = "Sources/*.swift"
   s.frameworks = 'UIKit'
 end
