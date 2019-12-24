@@ -37,7 +37,7 @@ pod 'StackableTableView'
 To integrate StackableTableView into your Xcode project using [Carthage](https://github.com/Carthage/Carthage), specify it in your `Cartfile`
 
 ```ruby
-github "omaralbeik/StackableTableView" ~> 1.4.3
+github "omaralbeik/StackableTableView" ~> 0.1.0
 ```
 
 ### Manually
