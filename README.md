@@ -6,6 +6,8 @@ A `UITableView` subclass that enables setting an array of views for both headers
 [![License](https://img.shields.io/cocoapods/l/StackableTableView.svg?style=flat)](https://cocoapods.org/pods/StackableTableView)
 [![Platform](https://img.shields.io/cocoapods/p/StackableTableView.svg?style=flat)](https://cocoapods.org/pods/StackableTableView)
 
+![Demo](https://github.com/omaralbeik/StackableTableView/blob/master/Assets/demo.gif)
+
 ## Requirements
 
 - iOS 11.0+
