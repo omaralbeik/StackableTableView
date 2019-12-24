@@ -1,0 +1,16 @@
+{
+  "object": {
+    "pins": [
+      {
+        "package": "StackableTableView",
+        "repositoryURL": "https://github.com/omaralbeik/StackableTableView",
+        "state": {
+          "branch": "master",
+          "revision": "464ed2b4432d3148736e9261eb9dbd728faa8d90",
+          "version": null
+        }
+      }
+    ]
+  },
+  "version": 1
+}
