@@ -117,7 +117,7 @@ private extension StackableTableView {
         }
     }
 
-    /// Created a plain `UIStackView`.
+    /// Creates a plain `UIStackView`.
     func createStackView() -> UIStackView {
         let view = SuperLayoutingStackView()
         view.axis = .vertical
