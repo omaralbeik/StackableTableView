@@ -38,7 +38,7 @@ open class StackableTableView: UITableView {
     public var headerViews: [UIView] = [] {
         didSet(oldViews) {
             headerViews.isEmpty ? removeStackView(for: .header) : attachStackView(for: .header)
-            updateArrengedViews(remove: oldViews, add: headerViews, in: headerStackView)
+            updateArrangedViews(remove: oldViews, add: headerViews, in: headerStackView)
         }
     }
 
@@ -46,7 +46,7 @@ open class StackableTableView: UITableView {
     public var footerViews: [UIView] = [] {
         didSet(oldViews) {
             footerViews.isEmpty ? removeStackView(for: .footer) : attachStackView(for: .footer)
-            updateArrengedViews(remove: oldViews, add: footerViews, in: footerStackView)
+            updateArrangedViews(remove: oldViews, add: footerViews, in: footerStackView)
         }
     }
 
@@ -117,7 +117,7 @@ private extension StackableTableView {
         }
     }
 
-    /// Created a plain `UIStackView`.
+    /// Creates a plain `UIStackView`.
     func createStackView() -> UIStackView {
         let view = SuperLayoutingStackView()
         view.axis = .vertical
@@ -131,9 +131,9 @@ private extension StackableTableView {
     ///   - viewsToRemove: views to be removed from the stack view.
     ///   - viewsToAdd: new views to be added to the stack view.
     ///   - stackView: `UIStackView`.
-    func updateArrengedViews(remove viewsToRemove: [UIView], add viewsToAdd: [UIView], in stackView: UIStackView) {
+    func updateArrangedViews(remove viewsToRemove: [UIView], add viewsToAdd: [UIView], in stackView: UIStackView) {
         removeArrangedSubviews(viewsToRemove, from: stackView)
-        addArrengedSubviews(viewsToAdd, to: stackView)
+        addArrangedSubviews(viewsToAdd, to: stackView)
     }
 
     /// Remove an array of views -if they exist- from a `UIStackView`.
@@ -152,7 +152,7 @@ private extension StackableTableView {
     /// - Parameters:
     ///   - views: views to add.
     ///   - stackView: `UIStackView`.
-    func addArrengedSubviews(_ views: [UIView], to stackView: UIStackView) {
+    func addArrangedSubviews(_ views: [UIView], to stackView: UIStackView) {
         views.forEach { view in
             if stackView.arrangedSubviews.contains(view) { return }
             stackView.addArrangedSubview(view)
