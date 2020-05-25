@@ -27,13 +27,6 @@ import UIKit
 ///  **Warning**: Do not set `tableHeaderView` or `tableFooterView` directly, use `headerViews` or `footerViews`.
 ///
 open class StackableTableView: UITableView {
-
-    /// Private `UIStackView` to attach header views to.
-    private lazy var headerStackView = createStackView()
-
-    /// Private `UIStackView` to attach footer views to.
-    private lazy var footerStackView = createStackView()
-
     /// Array of views to set as table view headers.
     public var headerViews: [UIView] = [] {
         didSet(oldViews) {
@@ -50,6 +43,24 @@ open class StackableTableView: UITableView {
         }
     }
 
+    /// **Warning**: Do not set `tableHeaderView` directly, add your view to `headerViews` instead.
+    public override var tableHeaderView: UIView? {
+        didSet {
+            if !isTableHeaderViewUsedInternally {
+                print("Warning: Do not set `tableHeaderView` directly, add your view to `headerViews` instead.")
+            }
+        }
+    }
+
+    /// **Warning**: Do not set `tableFooterView` directly, add your view to `footerViews` instead.
+    public override var tableFooterView: UIView? {
+        didSet {
+            if !isTableFooterViewUsedInternally {
+                print("Warning: Do not set `tableFooterView` directly, add your view to `footerViews` instead.")
+            }
+        }
+    }
+
     /// The default implementation uses any constraints you have set to determine the size and position of any subviews.
     open override func layoutSubviews() {
         super.layoutSubviews()
@@ -63,6 +74,15 @@ open class StackableTableView: UITableView {
         }
     }
 
+    // MARK: - Private
+
+    private var isTableHeaderViewUsedInternally = false
+    private lazy var headerStackView = createStackView()
+
+    private var isTableFooterViewUsedInternally = false
+    private lazy var footerStackView = createStackView()
+
+    internal var lastPrintedMessage: String?
 }
 
 // MARK: - Private Helpers
@@ -80,9 +100,13 @@ private extension StackableTableView {
     func removeStackView(for position: Position) {
         switch position {
         case .header:
+            isTableHeaderViewUsedInternally = true
             tableHeaderView = nil
+            isTableHeaderViewUsedInternally = false
         case .footer:
+            isTableFooterViewUsedInternally = true
             tableFooterView = nil
+            isTableFooterViewUsedInternally = false
         }
     }
 
@@ -91,9 +115,13 @@ private extension StackableTableView {
     func attachStackView(for position: Position) {
         switch position {
         case .header:
+            isTableHeaderViewUsedInternally = true
             tableHeaderView = headerStackView
+            isTableHeaderViewUsedInternally = false
         case .footer:
+            isTableFooterViewUsedInternally = true
             tableFooterView = footerStackView
+            isTableFooterViewUsedInternally = false
         }
     }
 
@@ -110,9 +138,13 @@ private extension StackableTableView {
             view.frame = viewFrame
             switch position {
             case .header:
+                isTableHeaderViewUsedInternally = true
                 tableHeaderView = view
+                isTableHeaderViewUsedInternally = false
             case .footer:
+                isTableFooterViewUsedInternally = true
                 tableFooterView = view
+                isTableFooterViewUsedInternally = false
             }
         }
     }
@@ -159,12 +191,17 @@ private extension StackableTableView {
         }
     }
 
+    /// Prints a message to console.
+    /// - Parameter message: message.
+    private func print(_ message: String) {
+        Swift.print(message)
+        lastPrintedMessage = message
+    }
 }
 
 // MARK: - Private Subclasses
 
-private extension StackableTableView {
-
+internal extension StackableTableView {
     /// A subclass of `UIStackView` that calls its superview's `setNeedsLayout` when layouted.
     final class SuperLayoutingStackView: UIStackView {
         override func layoutSubviews() {
@@ -172,5 +209,4 @@ private extension StackableTableView {
             superview?.setNeedsLayout()
         }
     }
-
 }

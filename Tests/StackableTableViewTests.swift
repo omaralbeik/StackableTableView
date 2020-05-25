@@ -24,7 +24,6 @@ import XCTest
 @testable import StackableTableView
 
 final class StackableTableViewTests: XCTestCase {
-
     func testHeaderViews() {
         let view = createTableView()
         XCTAssert(view.headerViews.isEmpty)
@@ -44,6 +43,8 @@ final class StackableTableViewTests: XCTestCase {
         view.headerViews = []
         XCTAssert(view.headerViews.isEmpty)
         XCTAssertNil(view.tableHeaderView)
+
+        XCTAssertNil(view.lastPrintedMessage)
     }
 
     func testFooterViews() {
@@ -65,15 +66,67 @@ final class StackableTableViewTests: XCTestCase {
         view.footerViews = []
         XCTAssert(view.footerViews.isEmpty)
         XCTAssertNil(view.tableFooterView)
+
+        XCTAssertNil(view.lastPrintedMessage)
     }
 
+    func testHeaderWarningMessage() {
+        let view = createTableView()
+        XCTAssertNil(view.lastPrintedMessage)
+        view.tableHeaderView = UIView()
+        XCTAssertEqual(view.lastPrintedMessage, "Warning: Do not set `tableHeaderView` directly, add your view to `headerViews` instead.")
+    }
+
+    func testFooterWarningMessage() {
+        let view = createTableView()
+        XCTAssertNil(view.lastPrintedMessage)
+        view.tableFooterView = UIView()
+        XCTAssertEqual(view.lastPrintedMessage, "Warning: Do not set `tableFooterView` directly, add your view to `footerViews` instead.")
+    }
+
+    func testLayoutSubviews() {
+        let view = createTableView()
+        view.layoutSubviews()
+        XCTAssertNil(view.tableHeaderView)
+        XCTAssertNil(view.tableFooterView)
+
+        let headerLabel = UILabel()
+        headerLabel.text = "Hello world"
+        headerLabel.sizeToFit()
+
+        let footerLabel = UILabel()
+        footerLabel.text = "Hello world"
+        footerLabel.sizeToFit()
+
+        view.headerViews = [headerLabel]
+        view.footerViews = [footerLabel]
+        view.layoutSubviews()
+
+        XCTAssertEqual(view.tableHeaderView?.frame.size.height, headerLabel.frame.size.height)
+        XCTAssertEqual(view.tableFooterView?.frame.size.height, footerLabel.frame.size.height)
+    }
+
+    func testSuperLayoutingStackView() {
+        let superview = SuperView()
+        let subview = StackableTableView.SuperLayoutingStackView()
+        superview.addSubview(subview)
+        XCTAssertFalse(superview.didCallSetNeedsLayout)
+        subview.layoutSubviews()
+        XCTAssert(superview.didCallSetNeedsLayout)
+    }
+}
+
+private class SuperView: UIView {
+    var didCallSetNeedsLayout = false
+    override func setNeedsLayout() {
+        super.setNeedsLayout()
+        didCallSetNeedsLayout = true
+    }
 }
 
 private extension StackableTableViewTests {
-
     func createTableView() -> StackableTableView {
         let frame = CGRect(x: 0, y: 0, width: 100, height: 100)
         return StackableTableView(frame: frame)
     }
-
 }

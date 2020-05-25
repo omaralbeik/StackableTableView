@@ -18,7 +18,6 @@
  */
 
 extension String {
-
     static func loremIpsum(ofLength length: Int = 445) -> String {
         guard length > 0 else { return "" }
 
@@ -31,5 +30,4 @@ extension String {
         }
         return loremIpsum
     }
-
 }

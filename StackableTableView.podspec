@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = 'StackableTableView'
-  s.version          = '0.1.0'
+  s.version          = '1.0.0'
   s.summary          = 'UITableView with stacked views for header and footer'
   s.description      = <<-DESC
   StackableTableView utilizes UITableView's tableHeaderView, tableFooterView, and UIStackView
