@@ -32,16 +32,6 @@ jobs:
           SCHEME: StackableTableView
           DESTINATION: platform=iOS Simulator,name=iPhone 11
   
-  Swiftlint:
-    runs-on: [macos]
-    name: SwiftLint
-    steps: 
-      - uses: actions/checkout@v1
-      - name: SwiftLint
-        run: |
-          brew install swiftlint
-          swiftlint
-  
   CocoaPods:
     name: CocoaPods
     runs-on: macos-latest
