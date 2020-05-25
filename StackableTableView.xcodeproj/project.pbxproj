@@ -8,9 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		070BF3EF23B16DD500F57FC0 /* StackableTableView.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 070BF3E523B16DD500F57FC0 /* StackableTableView.framework */; };
-		070BF3F423B16DD500F57FC0 /* ViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 070BF3F323B16DD500F57FC0 /* ViewTests.swift */; };
+		070BF3F423B16DD500F57FC0 /* StackableTableViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 070BF3F323B16DD500F57FC0 /* StackableTableViewTests.swift */; };
 		070BF3F623B16DD500F57FC0 /* StackableTableView.h in Headers */ = {isa = PBXBuildFile; fileRef = 070BF3E823B16DD500F57FC0 /* StackableTableView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		070BF40223B16EC000F57FC0 /* StackableTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 070BF3FF23B16E5E00F57FC0 /* StackableTableView.swift */; };
+		07CE6D1D247C70AD008FF0B9 /* StackableTableViewTests+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07CE6D1B247C7090008FF0B9 /* StackableTableViewTests+Helpers.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -28,9 +29,10 @@
 		070BF3E823B16DD500F57FC0 /* StackableTableView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StackableTableView.h; sourceTree = "<group>"; };
 		070BF3E923B16DD500F57FC0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		070BF3EE23B16DD500F57FC0 /* StackableTableViewTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = StackableTableViewTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		070BF3F323B16DD500F57FC0 /* ViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewTests.swift; sourceTree = "<group>"; };
+		070BF3F323B16DD500F57FC0 /* StackableTableViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StackableTableViewTests.swift; sourceTree = "<group>"; };
 		070BF3F523B16DD500F57FC0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		070BF3FF23B16E5E00F57FC0 /* StackableTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StackableTableView.swift; sourceTree = "<group>"; };
+		07CE6D1B247C7090008FF0B9 /* StackableTableViewTests+Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "StackableTableViewTests+Helpers.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,7 +85,8 @@
 		070BF3F223B16DD500F57FC0 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
-				070BF3F323B16DD500F57FC0 /* ViewTests.swift */,
+				070BF3F323B16DD500F57FC0 /* StackableTableViewTests.swift */,
+				07CE6D1B247C7090008FF0B9 /* StackableTableViewTests+Helpers.swift */,
 				070BF3F523B16DD500F57FC0 /* Info.plist */,
 			);
 			path = Tests;
@@ -229,7 +232,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				070BF3F423B16DD500F57FC0 /* ViewTests.swift in Sources */,
+				07CE6D1D247C70AD008FF0B9 /* StackableTableViewTests+Helpers.swift in Sources */,
+				070BF3F423B16DD500F57FC0 /* StackableTableViewTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

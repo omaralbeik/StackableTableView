@@ -23,7 +23,7 @@
 import XCTest
 @testable import StackableTableView
 
-final class ViewTests: XCTestCase {
+final class StackableTableViewTests: XCTestCase {
     func testHeaderViews() {
         let view = createTableView()
         XCTAssert(view.headerViews.isEmpty)
@@ -113,20 +113,5 @@ final class ViewTests: XCTestCase {
         XCTAssertFalse(superview.didCallSetNeedsLayout)
         subview.layoutSubviews()
         XCTAssert(superview.didCallSetNeedsLayout)
-    }
-}
-
-private class SuperView: UIView {
-    var didCallSetNeedsLayout = false
-    override func setNeedsLayout() {
-        super.setNeedsLayout()
-        didCallSetNeedsLayout = true
-    }
-}
-
-private extension ViewTests {
-    func createTableView() -> StackableTableView {
-        let frame = CGRect(x: 0, y: 0, width: 100, height: 100)
-        return StackableTableView(frame: frame)
     }
 }
