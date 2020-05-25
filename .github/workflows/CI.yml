@@ -1,0 +1,55 @@
+name: StackableTableView
+
+on: 
+  push:
+    branches: 
+      - master
+  pull_request:
+    branches: 
+      - master
+
+jobs:
+  Darwin:
+    name: Darwin
+    runs-on: macos-latest
+    env:
+      PROJECT: StackableTableView.xcodeproj
+      DEVELOPER_DIR: /Applications/Xcode_11.4.app/Contents/Developer
+    steps:
+    - uses: actions/checkout@v1
+    - name: Bundle Install
+      run: bundle install
+    - name: Brew Upgrade
+      run: |
+        brew update
+        brew outdated xctool || brew upgrade xctool
+        brew install swiftlint
+    - name: Test iOS
+      run: |
+        xcodebuild clean build test -project $PROJECT -scheme $SCHEME -destination "$DESTINATION" | XCPRETTY_JSON_FILE_OUTPUT="xcodebuild-ios.json" xcpretty -f `xcpretty-json-formatter`
+        bash <(curl -s https://codecov.io/bash) -cF ios -J 'StackableTableView'
+      env:
+          SCHEME: StackableTableView
+          DESTINATION: platform=iOS Simulator,name=iPhone 11
+  
+  Swiftlint:
+    runs-on: [macos]
+    name: SwiftLint
+    steps: 
+      - uses: actions/checkout@v1
+      - name: SwiftLint
+        run: |
+          brew install swiftlint
+          swiftlint
+  
+  CocoaPods:
+    name: CocoaPods
+    runs-on: macos-latest
+    env:
+      DEVELOPER_DIR: /Applications/Xcode_11.4.app/Contents/Developer
+    steps:
+    - uses: actions/checkout@v1
+    - name: Bundle Install
+      run: bundle install
+    - name: CocoaPods
+      run: bundle exec pod lib lint --skip-tests --allow-warnings --verbose

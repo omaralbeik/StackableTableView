@@ -46,7 +46,10 @@ class ViewController: UIViewController {
     }
 
     var tableView: StackableTableView {
-        view as! StackableTableView
+        guard let stackableView = view as? StackableTableView else {
+            fatalError()
+        }
+        return stackableView
     }
 
     lazy var sliderView = SliderView()
