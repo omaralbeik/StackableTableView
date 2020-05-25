@@ -23,7 +23,7 @@
 import XCTest
 @testable import StackableTableView
 
-final class StackableTableViewTests: XCTestCase {
+final class ViewTests: XCTestCase {
     func testHeaderViews() {
         let view = createTableView()
         XCTAssert(view.headerViews.isEmpty)
@@ -124,7 +124,7 @@ private class SuperView: UIView {
     }
 }
 
-private extension StackableTableViewTests {
+private extension ViewTests {
     func createTableView() -> StackableTableView {
         let frame = CGRect(x: 0, y: 0, width: 100, height: 100)
         return StackableTableView(frame: frame)
