@@ -4,15 +4,15 @@
 import PackageDescription
 
 let package = Package(
-    name: "StackableTableView",
-    platforms: [
-        .iOS(.v11)
-    ],
-    products: [
-        .library(name: "StackableTableView", targets: ["StackableTableView"])
-    ],
-    dependencies: [],
-    targets: [
-        .target(name: "StackableTableView", path: "Sources")
-    ]
+  name: "StackableTableView",
+  platforms: [
+    .iOS(.v11)
+  ],
+  products: [
+    .library(name: "StackableTableView", targets: ["StackableTableView"])
+  ],
+  dependencies: [],
+  targets: [
+    .target(name: "StackableTableView", path: "Sources")
+  ]
 )

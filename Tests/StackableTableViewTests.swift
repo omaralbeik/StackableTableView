@@ -24,94 +24,94 @@ import XCTest
 @testable import StackableTableView
 
 final class StackableTableViewTests: XCTestCase {
-    func testHeaderViews() {
-        let view = createTableView()
-        XCTAssert(view.headerViews.isEmpty)
-        XCTAssertNil(view.tableHeaderView)
+  func testHeaderViews() {
+    let view = createTableView()
+    XCTAssert(view.headerViews.isEmpty)
+    XCTAssertNil(view.tableHeaderView)
 
-        let label = UILabel()
-        label.text = "Hello World!"
+    let label = UILabel()
+    label.text = "Hello World!"
 
-        view.headerViews = [label]
-        XCTAssertEqual(view.headerViews, [label])
-        XCTAssertNotNil(view.tableHeaderView)
+    view.headerViews = [label]
+    XCTAssertEqual(view.headerViews, [label])
+    XCTAssertNotNil(view.tableHeaderView)
 
-        let headerStackView = view.tableHeaderView as? UIStackView
-        XCTAssertNotNil(headerStackView)
-        XCTAssertEqual(headerStackView?.arrangedSubviews, [label])
+    let headerStackView = view.tableHeaderView as? UIStackView
+    XCTAssertNotNil(headerStackView)
+    XCTAssertEqual(headerStackView?.arrangedSubviews, [label])
 
-        view.headerViews = []
-        XCTAssert(view.headerViews.isEmpty)
-        XCTAssertNil(view.tableHeaderView)
+    view.headerViews = []
+    XCTAssert(view.headerViews.isEmpty)
+    XCTAssertNil(view.tableHeaderView)
 
-        XCTAssertNil(view.lastPrintedMessage)
-    }
+    XCTAssertNil(view.lastPrintedMessage)
+  }
 
-    func testFooterViews() {
-        let view = createTableView()
-        XCTAssert(view.footerViews.isEmpty)
-        XCTAssertNil(view.tableFooterView)
+  func testFooterViews() {
+    let view = createTableView()
+    XCTAssert(view.footerViews.isEmpty)
+    XCTAssertNil(view.tableFooterView)
 
-        let label = UILabel()
-        label.text = "Hello World!"
+    let label = UILabel()
+    label.text = "Hello World!"
 
-        view.footerViews = [label]
-        XCTAssertEqual(view.footerViews, [label])
-        XCTAssertNotNil(view.tableFooterView)
+    view.footerViews = [label]
+    XCTAssertEqual(view.footerViews, [label])
+    XCTAssertNotNil(view.tableFooterView)
 
-        let footerStackView = view.tableFooterView as? UIStackView
-        XCTAssertNotNil(footerStackView)
-        XCTAssertEqual(footerStackView?.arrangedSubviews, [label])
+    let footerStackView = view.tableFooterView as? UIStackView
+    XCTAssertNotNil(footerStackView)
+    XCTAssertEqual(footerStackView?.arrangedSubviews, [label])
 
-        view.footerViews = []
-        XCTAssert(view.footerViews.isEmpty)
-        XCTAssertNil(view.tableFooterView)
+    view.footerViews = []
+    XCTAssert(view.footerViews.isEmpty)
+    XCTAssertNil(view.tableFooterView)
 
-        XCTAssertNil(view.lastPrintedMessage)
-    }
+    XCTAssertNil(view.lastPrintedMessage)
+  }
 
-    func testHeaderWarningMessage() {
-        let view = createTableView()
-        XCTAssertNil(view.lastPrintedMessage)
-        view.tableHeaderView = UIView()
-        XCTAssertEqual(view.lastPrintedMessage, "Warning: Do not set `tableHeaderView` directly, add your view to `headerViews` instead.")
-    }
+  func testHeaderWarningMessage() {
+    let view = createTableView()
+    XCTAssertNil(view.lastPrintedMessage)
+    view.tableHeaderView = UIView()
+    XCTAssertEqual(view.lastPrintedMessage, "Warning: Do not set `tableHeaderView` directly, add your view to `headerViews` instead.")
+  }
 
-    func testFooterWarningMessage() {
-        let view = createTableView()
-        XCTAssertNil(view.lastPrintedMessage)
-        view.tableFooterView = UIView()
-        XCTAssertEqual(view.lastPrintedMessage, "Warning: Do not set `tableFooterView` directly, add your view to `footerViews` instead.")
-    }
+  func testFooterWarningMessage() {
+    let view = createTableView()
+    XCTAssertNil(view.lastPrintedMessage)
+    view.tableFooterView = UIView()
+    XCTAssertEqual(view.lastPrintedMessage, "Warning: Do not set `tableFooterView` directly, add your view to `footerViews` instead.")
+  }
 
-    func testLayoutSubviews() {
-        let view = createTableView()
-        view.layoutSubviews()
-        XCTAssertNil(view.tableHeaderView)
-        XCTAssertNil(view.tableFooterView)
+  func testLayoutSubviews() {
+    let view = createTableView()
+    view.layoutSubviews()
+    XCTAssertNil(view.tableHeaderView)
+    XCTAssertNil(view.tableFooterView)
 
-        let headerLabel = UILabel()
-        headerLabel.text = "Hello world"
-        headerLabel.sizeToFit()
+    let headerLabel = UILabel()
+    headerLabel.text = "Hello world"
+    headerLabel.sizeToFit()
 
-        let footerLabel = UILabel()
-        footerLabel.text = "Hello world"
-        footerLabel.sizeToFit()
+    let footerLabel = UILabel()
+    footerLabel.text = "Hello world"
+    footerLabel.sizeToFit()
 
-        view.headerViews = [headerLabel]
-        view.footerViews = [footerLabel]
-        view.layoutSubviews()
+    view.headerViews = [headerLabel]
+    view.footerViews = [footerLabel]
+    view.layoutSubviews()
 
-        XCTAssertEqual(view.tableHeaderView?.frame.size.height, headerLabel.frame.size.height)
-        XCTAssertEqual(view.tableFooterView?.frame.size.height, footerLabel.frame.size.height)
-    }
+    XCTAssertEqual(view.tableHeaderView?.frame.size.height, headerLabel.frame.size.height)
+    XCTAssertEqual(view.tableFooterView?.frame.size.height, footerLabel.frame.size.height)
+  }
 
-    func testSuperLayoutingStackView() {
-        let superview = SuperView()
-        let subview = StackableTableView.SuperLayoutingStackView()
-        superview.addSubview(subview)
-        XCTAssertFalse(superview.didCallSetNeedsLayout)
-        subview.layoutSubviews()
-        XCTAssert(superview.didCallSetNeedsLayout)
-    }
+  func testSuperLayoutingStackView() {
+    let superview = SuperView()
+    let subview = StackableTableView.SuperLayoutingStackView()
+    superview.addSubview(subview)
+    XCTAssertFalse(superview.didCallSetNeedsLayout)
+    subview.layoutSubviews()
+    XCTAssert(superview.didCallSetNeedsLayout)
+  }
 }
